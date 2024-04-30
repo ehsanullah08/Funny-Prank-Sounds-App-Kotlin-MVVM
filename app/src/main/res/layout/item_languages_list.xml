@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="languageItem"
+            type="com.example.pranksounds.data.models.LanguageItem" />
+
+        <variable
+            name="languageClickListener"
+            type="com.example.pranksounds.ui.adapters.LanguageClickListener" />
+    </data>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginStart="@dimen/_7dp"
+        android:layout_marginTop="@dimen/_10dp"
+        android:layout_marginEnd="@dimen/_7dp"
+        android:layout_marginBottom="@dimen/_10dp"
+        android:onClick="@{() -> languageClickListener.onClick(languageItem)}"
+        app:cardCornerRadius="@dimen/_10dp"
+        app:cardElevation="@dimen/_5dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_language"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@{languageItem.selected ? @color/purple_transparent : @color/white}"
+            android:drawableEnd="@{languageItem.selected ? @drawable/ic_radio_checked : @drawable/ic_radio_unchecked}"
+            android:elevation="@dimen/_3dp"
+            android:fontFamily="@font/nunito_bold"
+            android:gravity="center"
+            android:paddingStart="@dimen/_10dp"
+            android:paddingEnd="@dimen/_10dp"
+            android:text="@{languageItem.languageName}"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </com.google.android.material.card.MaterialCardView>
+</layout>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="categoryItem"
+            type="com.example.pranksounds.data.models.SoundCategoryItem" />
+
+        <variable
+            name="soundCategoryClickListener"
+            type="com.example.pranksounds.ui.adapters.SoundCategoryClickListener" />
+    </data>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_160dp"
+        android:layout_marginStart="@dimen/_7dp"
+        android:layout_marginTop="@dimen/_10dp"
+        android:layout_marginEnd="@dimen/_7dp"
+        android:layout_marginBottom="@dimen/_10dp"
+        android:onClick="@{() -> soundCategoryClickListener.onClick(categoryItem)}"
+        app:cardCornerRadius="@dimen/_10dp"
+        app:cardElevation="@dimen/_5dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@{categoryItem.colorCode}">
+
+            <ImageView
+                android:id="@+id/ivThumbnail"
+                imageFromDrawable="@{categoryItem.bgImage}"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:paddingStart="@dimen/_10dp"
+                android:paddingTop="@dimen/_15dp"
+                android:paddingEnd="@dimen/_10dp"
+                android:paddingBottom="@dimen/_5dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toTopOf="@+id/tvTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10dp"
+                android:layout_marginEnd="@dimen/_10dp"
+                android:elevation="@dimen/_3dp"
+                android:fontFamily="@font/nunito_bold"
+                android:gravity="center"
+                android:paddingBottom="@dimen/_7dp"
+                android:text="@{categoryItem.title}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textColor="@android:color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivThumbnail" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
