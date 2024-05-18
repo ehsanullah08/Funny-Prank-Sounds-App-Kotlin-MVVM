@@ -1,40 +1,31 @@
 package com.example.pranksounds.ui.activities
 
-import android.animation.ObjectAnimator
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.pranksounds.R
 import com.example.pranksounds.data.models.SoundItem
 import com.example.pranksounds.databinding.ActivityPlaySoundBinding
+import com.example.pranksounds.utils.AdsHelper
+import com.example.pranksounds.utils.AnimationHelper
 import com.example.pranksounds.utils.Constants
-import com.example.pranksounds.utils.GoogleMobileAdsConsentManager
 import com.example.pranksounds.viewModels.PlaySoundViewModel
-import com.google.ads.mediation.admob.AdMobAdapter
-import com.google.android.gms.ads.AdError
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.FullScreenContentCallback
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
-import com.google.android.gms.ads.nativead.NativeAd
-import com.startapp.sdk.ads.banner.Banner
-import com.startapp.sdk.adsbase.StartAppAd
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.io.IOException
-import java.util.concurrent.atomic.AtomicBoolean
-import kotlin.random.Random
+import kotlin.concurrent.timer
 
 
 class PlaySoundActivity : AppCompatActivity() {
@@ -47,14 +38,7 @@ class PlaySoundActivity : AppCompatActivity() {
     private var soundItem: SoundItem? = null
     private var isMarkedFav = false
 
-    private val isMobileAdsInitializeCalled = AtomicBoolean(false)
-    private lateinit var googleMobileAdsConsentManager: GoogleMobileAdsConsentManager
-    private var currentNativeAd: NativeAd? = null
-
-    // Scale the image to 1.5 times its size in both x and y direction
-    private lateinit var scaleX: ObjectAnimator
-    private lateinit var scaleY: ObjectAnimator
-    private lateinit var shake: ObjectAnimator
+    private var timerJob: Job? = null
 
 
     private val bannerAdSize: AdSize
@@ -78,6 +62,11 @@ class PlaySoundActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initializations()
+        setupViews()
+    }
+
+    private fun initializations() {
         binding = ActivityPlaySoundBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -86,22 +75,10 @@ class PlaySoundActivity : AppCompatActivity() {
 
         binding.soundItem = getSoundItem()
         binding.lifecycleOwner = this
-
-        setupViews()
-        setupDelaySpinner()
-        setupMediaPlayer()
     }
 
-    private fun getSoundItem(): SoundItem? {
-        if (intent.hasExtra(Constants.SELECTED_SOUND)) {
-            soundItem = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                intent.getParcelableExtra(Constants.SELECTED_SOUND, SoundItem::class.java)
-            } else {
-                intent.getParcelableExtra<SoundItem>(Constants.SELECTED_SOUND)
-            }
-        }
-
-        return soundItem
+    fun onIvBackClick(view: View) {
+        finish()
     }
 
     fun onIvFavClick(view: View) {
@@ -131,15 +108,68 @@ class PlaySoundActivity : AppCompatActivity() {
         }
     }
 
-    fun onIvBackClick(view: View) {
-        finish()
+    fun onIbPlaySoundClick(view: View) {
+        startMediaPlayer()
+    }
+
+    fun onIvPlaySoundIconClick(view: View) {
+        binding.ibPlaySound.performClick()
+    }
+
+    fun onIvLoopClick(view: View) {
+        if (mediaPlayer.isLooping) {
+            mediaPlayer.isLooping = false
+            binding.tvLoopStatus.text = getString(R.string.loop_off)
+            binding.ivLoop.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.ic_start_loop
+                )
+            )
+        } else {
+            mediaPlayer.isLooping = true
+            binding.tvLoopStatus.text = getString(R.string.loop_on)
+            binding.ivLoop.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.ic_stop_loop
+                )
+            )
+        }
+    }
+
+    fun onIvCancelTimerClick(view: View) {
+        stopCoroutineTimer()
+    }
+
+    private fun getSoundItem(): SoundItem? {
+        if (intent.hasExtra(Constants.SELECTED_SOUND)) {
+            soundItem = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                intent.getParcelableExtra(Constants.SELECTED_SOUND, SoundItem::class.java)
+            } else {
+                intent.getParcelableExtra<SoundItem>(Constants.SELECTED_SOUND)
+            }
+        }
+
+        return soundItem
     }
 
     private fun setupViews() {
-        setupNativeAd()
+        AdsHelper.loadBannerAdWithConsent(
+            this@PlaySoundActivity,
+            binding.bannerAdPlaceholder,
+            Constants.BANNER_TEST_AD_ID_1,
+            bannerAdSize
+        )
 
+        setupFavorite()
+        setupDelaySpinner()
+        setupMediaPlayer()
+    }
+
+    private fun setupFavorite() {
         soundItem?.let {
-
+            
             playSoundViewModel.isSoundExists(this, soundItem?.soundId!!).observe(this) {
                 if (it > 0) {
                     isMarkedFav = true
@@ -177,6 +207,59 @@ class PlaySoundActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, R.layout.item_simple_spinner, itemList)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinner.adapter = adapter
+
+
+        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val selectedItem = parent.getItemAtPosition(position)
+                if (position == 0) {
+                    stopCoroutineTimer()
+                } else {
+                    startCoroutineTimer((getDelayTime() / 1000).toInt())
+
+                    if (mediaPlayer.isPlaying)
+                        binding.ibPlaySound.performClick()
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Handle case where no item is selected, if needed
+            }
+        }
+    }
+
+    private fun startCoroutineTimer(countdownTime: Int) {
+
+        // Cancel the previous timer job if it exists
+        timerJob?.cancel()
+
+        timerJob = lifecycleScope.launch {
+            var currentTime = countdownTime
+            binding.timerGroup.visibility = View.VISIBLE
+
+            while (currentTime > 0) {
+
+                binding.tvTimer.text = formatSecondsToMMSS(currentTime)
+                delay(1000)
+
+                if (currentTime == 1) {
+                    binding.ibPlaySound.performClick()
+                }
+
+                currentTime--
+            }
+        }
+    }
+
+    private fun stopCoroutineTimer() {
+        timerJob?.cancel()
+        binding.spinner.setSelection(0)
+        binding.timerGroup.visibility = View.INVISIBLE
     }
 
     private fun setupMediaPlayer() {
@@ -191,38 +274,6 @@ class PlaySoundActivity : AppCompatActivity() {
             mediaPlayer.prepare()
         } catch (e: IOException) {
             e.printStackTrace()
-        }
-
-        binding.ibPlaySound.setOnClickListener {
-            Handler(Looper.getMainLooper()).postDelayed({
-                startMediaPlayer()
-            }, getDelayTime())
-        }
-
-        binding.ivPlaySoundIcon.setOnClickListener {
-            binding.ibPlaySound.performClick()
-        }
-
-        binding.ivLoop.setOnClickListener {
-            if (mediaPlayer.isLooping) {
-                mediaPlayer.isLooping = false
-                binding.tvLoopStatus.text = getString(R.string.loop_off)
-                binding.ivLoop.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this,
-                        R.drawable.ic_start_loop
-                    )
-                )
-            } else {
-                mediaPlayer.isLooping = true
-                binding.tvLoopStatus.text = getString(R.string.loop_on)
-                binding.ivLoop.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this,
-                        R.drawable.ic_stop_loop
-                    )
-                )
-            }
         }
     }
 
@@ -261,48 +312,15 @@ class PlaySoundActivity : AppCompatActivity() {
                 )
             )
             binding.ibPlaySound.setBackgroundResource(R.drawable.rounded_red_button_background)
+            stopCoroutineTimer()
 
-            startAnimation()
+            AnimationHelper.startAnimation(
+                this,
+                binding.ivPlaySoundIcon,
+                soundItem?.fileName?.contains("trimmer")!!
+            )
             updateSeekBar()
         }
-    }
-
-    private fun startAnimation() {
-        scaleX = ObjectAnimator.ofFloat(binding.ivPlaySoundIcon, "scaleX", 1f, 1.5f)
-        scaleY = ObjectAnimator.ofFloat(binding.ivPlaySoundIcon, "scaleY", 1f, 1.5f)
-        shake = ObjectAnimator.ofFloat(
-            binding.ivPlaySoundIcon,
-            "translationX",
-            0f,
-            10f,
-            -10f,
-            10f,
-            -10f,
-            0f
-        )
-
-        scaleX.duration = 100
-        scaleY.duration = 100
-        shake.duration = 100 // Control the speed of shaking
-
-        scaleX.repeatCount = ObjectAnimator.INFINITE
-        scaleY.repeatCount = ObjectAnimator.INFINITE
-
-        scaleX.repeatMode = ObjectAnimator.REVERSE
-        scaleY.repeatMode = ObjectAnimator.REVERSE
-
-        shake.repeatCount = ObjectAnimator.INFINITE
-        shake.repeatMode = ObjectAnimator.REVERSE
-
-        scaleX.start()
-        scaleY.start()
-        shake.start()
-    }
-
-    private fun stopAnimation() {
-        scaleX.cancel()
-        scaleY.cancel()
-        shake.cancel()
     }
 
     private fun updateSeekBar() {
@@ -321,136 +339,36 @@ class PlaySoundActivity : AppCompatActivity() {
                     )
 
                     binding.ibPlaySound.setBackgroundResource(R.drawable.rounded_orange_button_background)
-                    stopAnimation()
+                    AnimationHelper.stopAnimation()
                 }
             }
         })
     }
 
-    private fun setupNativeAd() {
-        googleMobileAdsConsentManager =
-            GoogleMobileAdsConsentManager.getInstance(applicationContext)
-        googleMobileAdsConsentManager.gatherConsent(this) { consentError ->
-            if (consentError != null) {
-                // Consent not obtained in current session.
-                Log.w("PlaySoundActivity", "${consentError.errorCode}. ${consentError.message}")
-            }
-        }
-
-        // This sample attempts to load ads using consent obtained in the previous session.
-        if (googleMobileAdsConsentManager.canRequestAds) {
-            if (isMobileAdsInitializeCalled.getAndSet(true)) {
-                return
-            }
-            loadBannerAd()
-        }
+    private fun stopSoundsAndViews() {
+        AnimationHelper.stopVibration()
+        stopCoroutineTimer()
+        mediaPlayer.release()
+        handler.removeCallbacksAndMessages(null) // Stop the Handler when the activity is being destroyed
     }
 
-    private fun loadStartappBannerAd() {
-        val banner = Banner(this)
-        binding.bannerAdPlaceholder.addView(banner)
-    }
-
-    private fun loadInterstitialAd() {
-        val adRequest: AdRequest = AdRequest.Builder().build()
-
-        InterstitialAd.load(
-            this,
-            "ca-app-pub-3940256099942544/1033173712",
-            adRequest,
-            object : InterstitialAdLoadCallback() {
-                override fun onAdFailedToLoad(adError: LoadAdError) {
-                    val error =
-                        "domain: ${adError.domain}, code: ${adError.code}, " + "message: ${adError.message}"
-
-                    StartAppAd.showAd(this@PlaySoundActivity)
-                }
-
-                override fun onAdLoaded(ad: InterstitialAd) {
-
-                    ad.fullScreenContentCallback =
-                        object : FullScreenContentCallback() {
-                            override fun onAdDismissedFullScreenContent() {
-
-                            }
-
-                            override fun onAdFailedToShowFullScreenContent(adError: AdError) {
-                                StartAppAd.showAd(this@PlaySoundActivity)
-                            }
-
-                            override fun onAdShowedFullScreenContent() {
-
-                            }
-                        }
-
-                    ad.show(this@PlaySoundActivity)
-                }
-            }
-        )
-    }
-
-    private fun loadBannerAd() {
-        val adView = AdView(this)
-        binding.bannerAdPlaceholder.addView(adView)
-        // This is an ad unit ID for a test ad. Replace with your own banner ad unit ID.
-        adView.adUnitId = "ca-app-pub-3940256099942544/9214589741"
-        adView.setAdSize(bannerAdSize)
-
-
-        if (Random.nextInt(1, 3) == 2) { // only 1 or 2 will be generated
-            val extras = Bundle()
-            extras.putString("collapsible", "bottom")
-
-            val adRequest = AdRequest.Builder()
-                .addNetworkExtrasBundle(AdMobAdapter::class.java, extras)
-                .build()
-
-            // Start loading the ad in the background.
-            adView.loadAd(adRequest)
-        } else {
-            val adRequest = AdRequest.Builder().build()
-            adView.loadAd(adRequest)
-        }
-
-        adView.adListener = object : AdListener() {
-            override fun onAdClicked() {
-                // Code to be executed when the user clicks on an ad.
-            }
-
-            override fun onAdClosed() {
-                // Code to be executed when the user is about to return
-                // to the app after tapping on an ad.
-            }
-
-            override fun onAdFailedToLoad(adError: LoadAdError) {
-                loadStartappBannerAd()
-            }
-
-            override fun onAdImpression() {
-                // Code to be executed when an impression is recorded
-                // for an ad.
-            }
-
-            override fun onAdLoaded() {
-                // Code to be executed when an ad finishes loading.
-            }
-
-            override fun onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
-            }
-        }
+    private fun formatSecondsToMMSS(seconds: Int): String {
+        val minutes = seconds / 60
+        val remainingSeconds = seconds % 60
+        return String.format("%02d:%02d", minutes, remainingSeconds)
     }
 
     override fun onDestroy() {
         if (Constants.USER_INTERACTIONS_COUNT >= 3) {
             Constants.USER_INTERACTIONS_COUNT = 0
-            loadInterstitialAd()
+
+            AdsHelper.loadInterstitialAdWithConsent(
+                this@PlaySoundActivity,
+                Constants.INTERSTITIAL_TEST_AD_ID_1
+            )
         }
 
-        currentNativeAd?.destroy()
         super.onDestroy()
-        mediaPlayer.release()
-        handler.removeCallbacksAndMessages(null) // Stop the Handler when the activity is being destroyed
+        stopSoundsAndViews()
     }
 }

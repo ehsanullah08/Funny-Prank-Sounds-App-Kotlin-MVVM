@@ -6,7 +6,7 @@ junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 appcompat = "1.6.1"
-material = "1.11.0"
+material = "1.12.0"
 constraintlayout = "2.1.4"
 lifecycleLivedataKtx = "2.4.0"
 lifecycleViewmodelKtx = "2.7.0"
@@ -20,6 +20,9 @@ roomCompiler = "2.6.1"
 roomKtx = "2.6.1"
 playServicesAds = "23.0.0"
 inappSdk = "4.11.5"
+firebaseCrashlytics = "18.6.4"
+firebaseAnalytics = "21.6.2"
+firebaseBom = "32.8.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -41,8 +44,13 @@ androidx-room-compiler = { group = "androidx.room", name = "room-compiler", vers
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
 play-services-ads = { group = "com.google.android.gms", name = "play-services-ads", version.ref = "playServicesAds" }
 inapp-sdk = { group = "com.startapp", name = "inapp-sdk", version.ref = "inappSdk" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics", version.ref = "firebaseCrashlytics" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics", version.ref = "firebaseAnalytics" }
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+crashlytics = { id = "com.google.firebase.crashlytics", version = "2.9.9"}
+googleServices = { id = "com.google.gms.google-services", version = "4.3.14"}
 

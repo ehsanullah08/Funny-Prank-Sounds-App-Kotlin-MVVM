@@ -142,7 +142,7 @@ class HomeRepo {
                 SoundCategoryItem(
                     16,
                     context.getString(R.string.man_crying),
-                    context.getColor(R.color.color_12),
+                    context.getColor(R.color.color_13),
                     R.drawable.ic_man_crying
                 )
             )
@@ -150,7 +150,7 @@ class HomeRepo {
                 SoundCategoryItem(
                     17,
                     context.getString(R.string.woman_crying),
-                    context.getColor(R.color.color_12),
+                    context.getColor(R.color.color_14),
                     R.drawable.ic_woman_crying
                 )
             )

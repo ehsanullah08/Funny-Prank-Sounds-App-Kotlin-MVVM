@@ -92,11 +92,11 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     fun onTvPrivacyPolicyClick(view: View) {
-
+        startActivity(Intent(this, PrivacyPolicyActivity::class.java))
     }
 
     fun onTvFeedbackClick(view: View) {
-        val feedbackEmail = "platinum.studios.co@gmail.com"
+        val feedbackEmail = "platinum.studio.pvt@gmail.com"
         val subject = getString(R.string._feedback, getString(R.string.app_name))
 
         val emailIntent = Intent(Intent.ACTION_SENDTO).apply {

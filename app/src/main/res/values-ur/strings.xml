@@ -6,11 +6,11 @@
     <string name="sound_icon">آواز کا آئیکن</string>
     <string name="loop_button">لوپ بٹن</string>
     <string name="play_button">پلے بٹن</string>
-    <string name="play_instantly">فوری طور پر کھیلیں</string>
+    <string name="play_instantly">فوری طور پر شروع کریں</string>
     <string name="play_after_5s">5 سیکنڈ کے بعد شروع کریں</string>
     <string name="play_after_10s">10 سیکنڈ کے بعد شروع کریں</string>
     <string name="play_after_15s">15 سیکنڈ کے بعد شروع کریں</string>
-    <string name="play_after_20s">20 سیکنڈ کے بعد شروع کری</string>
+    <string name="play_after_20s">20 سیکنڈ کے بعد شروع کریں</string>
     <string name="play_after_30s">30 سیکنڈ کے بعد شروع کریں</string>
     <string name="play_after_40s">40 سیکنڈ کے بعد شروع کریں</string>
     <string name="play_after_50s">50 سیکنڈ کے بعد شروع کریں</string>
@@ -50,7 +50,6 @@
     <string name="baby_laughing">بچے کی ہنسی</string>
     <string name="fart_1">پادنا 1</string>
 
-    <string name="failed_to_load_native_ad_with_error">خرابی کے ساتھ مقامی اشتہار لوڈ کرنے میں ناکام</string>
     <string name="loop_on">لوپ آن</string>
     <string name="loop_off">لوپ آف</string>
     <string name="english">English</string>
@@ -181,7 +180,6 @@
     <string name="baby_laugh_4">بچے کی ہنسی 4</string>
     <string name="baby_laugh_5">بچے کی ہنسی 5</string>
     <string name="baby_laugh_6">بچے کی ہنسی 6</string>
-    <string name="ad_attribution">اشتہار</string>
     <string name="if_you_want_to_prank_someone_then_check_out_this_app">اگر آپ کسی کو مذاق کرنا چاہتے ہیں تو اس ایپ کو دیکھیں: %1$s</string>
     <string name="share_via">کے ذریعے شیئر کریں</string>
     <string name="_feedback">%1$s [فیڈ بیک]</string>

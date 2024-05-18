@@ -48,7 +48,6 @@
     <string name="woman_laughing">हंसती हुई औरत</string>
     <string name="baby_laughing">हँसता हुआ बच्चा</string>
     <string name="fart_1">पादना 1</string>
-    <string name="failed_to_load_native_ad_with_error">%1$s त्रुटि के साथ मूल विज्ञापन लोड करने में विफल</string>
     <string name="loop_on">लूप ऑन</string>
     <string name="loop_off">लूप बंद करें</string>
     <string name="english">English</string>
@@ -179,7 +178,6 @@
     <string name="baby_laugh_4">बेबी हँसी 4</string>
     <string name="baby_laugh_5">बेबी हँसी 5</string>
     <string name="baby_laugh_6">बेबी हँसी 6</string>
-    <string name="ad_attribution">विज्ञापन</string>
     <string name="if_you_want_to_prank_someone_then_check_out_this_app">यदि आप किसी को प्रैंक करना चाहते हैं तो इस ऐप को देखें: %1$s</string>
     <string name="share_via">के माध्यम से बाँटे</string>
     <string name="_feedback">%1$s [प्रतिक्रिया]</string>

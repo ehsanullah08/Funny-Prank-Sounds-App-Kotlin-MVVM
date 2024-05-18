@@ -48,7 +48,6 @@
     <string name="woman_laughing">笑的女人</string>
     <string name="baby_laughing">笑宝贝</string>
     <string name="fart_1">放屁1</string>
-    <string name="failed_to_load_native_ad_with_error">无法加载原生广告，错误为 %1$s</string>
     <string name="loop_on">循环播放</string>
     <string name="loop_off">循环关闭</string>
     <string name="english">English</string>
@@ -179,7 +178,6 @@
     <string name="baby_laugh_4">婴儿笑 4</string>
     <string name="baby_laugh_5">婴儿笑 5</string>
     <string name="baby_laugh_6">婴儿笑 6</string>
-    <string name="ad_attribution">广告</string>
     <string name="if_you_want_to_prank_someone_then_check_out_this_app">如果您想恶作剧某人，请查看此应用程序：%1$s</string>
     <string name="share_via">分享通过</string>
     <string name="_feedback">%1$s [反馈]</string>

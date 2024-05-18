@@ -23,9 +23,12 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.pranksounds.BuildConfig
 import com.example.pranksounds.R
 import com.example.pranksounds.databinding.ActivityMainBinding
+import com.example.pranksounds.utils.AdsHelper
 import com.example.pranksounds.viewModels.HeaderViewModel
 import com.example.pranksounds.viewModels.HomeViewModel
 import com.google.android.gms.ads.MobileAds
+import com.google.firebase.FirebaseApp
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.startapp.sdk.adsbase.StartAppSDK
 
 class MainActivity : AppCompatActivity() {
@@ -36,14 +39,24 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initializations()
+        setupViews()
+    }
+
+    private fun initializations() {
         // NOTE always use test ads during development and testing
         StartAppSDK.setTestAdsEnabled(BuildConfig.DEBUG);
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        MobileAds.initialize(this) {}
+        FirebaseApp.initializeApp(this)
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
 
+        AdsHelper.initializeAdmob(this)
+    }
+
+    private fun setupViews() {
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)

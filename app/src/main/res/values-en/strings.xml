@@ -48,7 +48,6 @@
     <string name="woman_laughing">Laughing Woman</string>
     <string name="baby_laughing">Laughing Baby</string>
     <string name="fart_1">Fart 1</string>
-    <string name="failed_to_load_native_ad_with_error">Failed to load native ad with error %1$s</string>
     <string name="loop_on">Loop on</string>
     <string name="loop_off">Loop off</string>
     <string name="english">English</string>
@@ -179,7 +178,6 @@
     <string name="baby_laugh_4">Baby Laugh 4</string>
     <string name="baby_laugh_5">Baby Laugh 5</string>
     <string name="baby_laugh_6">Baby Laugh 6</string>
-    <string name="ad_attribution">Ad</string>
     <string name="if_you_want_to_prank_someone_then_check_out_this_app">If you want to prank someone then check out this app: %1$s</string>
     <string name="share_via">Share via</string>
     <string name="_feedback">%1$s [Feedback]</string>

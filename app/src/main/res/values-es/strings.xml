@@ -48,7 +48,6 @@
     <string name="woman_laughing">mujer riendo</string>
     <string name="baby_laughing">bebe riendo</string>
     <string name="fart_1">pedo 1</string>
-    <string name="failed_to_load_native_ad_with_error">No se pudo cargar el anuncio nativo con el error %1$s</string>
     <string name="loop_on">Bucle encendido</string>
     <string name="loop_off">bucle fuera</string>
     <string name="english">English</string>
@@ -179,7 +178,6 @@
     <string name="baby_laugh_4">risa de bebe 4</string>
     <string name="baby_laugh_5">risa de bebe 5</string>
     <string name="baby_laugh_6">risa de bebe 6</string>
-    <string name="ad_attribution">Anuncio</string>
     <string name="if_you_want_to_prank_someone_then_check_out_this_app">Si quieres gastarle una broma a alguien, echa un vistazo a esta aplicación: %1$s</string>
     <string name="share_via">Compartir via</string>
     <string name="_feedback">%1$s [Comentarios]</string>

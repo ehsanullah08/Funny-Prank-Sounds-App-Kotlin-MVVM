@@ -48,7 +48,6 @@
     <string name="woman_laughing">امرأة تضحك</string>
     <string name="baby_laughing">يضحك الطفل</string>
     <string name="fart_1">ضرطة 1</string>
-    <string name="failed_to_load_native_ad_with_error">فشل تحميل الإعلان الأصلي مع الخطأ %1$s</string>
     <string name="loop_on">حلقة على</string>
     <string name="loop_off">حلقة قبالة</string>
     <string name="english">English</string>
@@ -179,7 +178,6 @@
     <string name="baby_laugh_4">ضحكة الطفل 4</string>
     <string name="baby_laugh_5">ضحكة طفل 5</string>
     <string name="baby_laugh_6">ضحكة الطفل 6</string>
-    <string name="ad_attribution">إعلان</string>
     <string name="if_you_want_to_prank_someone_then_check_out_this_app">إذا كنت تريد إجراء مقلب على شخص ما، فاطلع على هذا التطبيق: %1$s</string>
     <string name="share_via">شارك عبر</string>
     <string name="_feedback">%1$s [تعليقات]</string>

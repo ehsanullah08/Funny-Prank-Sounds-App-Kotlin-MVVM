@@ -71,10 +71,37 @@
                 imageFromDrawable="@{soundItem.bgImage}"
                 android:layout_width="@dimen/_120dp"
                 android:layout_height="@dimen/_120dp"
-                android:layout_margin="@dimen/_50dp"
+                android:layout_margin="@dimen/_30dp"
                 android:contentDescription="@string/sound_icon"
+                android:onClick="onIvPlaySoundIconClick"
                 tools:srcCompat="@tools:sample/avatars" />
         </FrameLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_extra_bold"
+            android:text="00:00"
+            android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fl_sound_icon" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_cancel_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_10dp"
+            android:background="?attr/selectableItemBackground"
+            android:onClick="onIvCancelTimerClick"
+            android:paddingStart="@dimen/_5dp"
+            android:paddingEnd="@dimen/_5dp"
+            android:src="@drawable/ic_cancel"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_timer"
+            app:layout_constraintStart_toEndOf="@+id/tv_timer"
+            app:layout_constraintTop_toTopOf="@+id/tv_timer" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
@@ -97,6 +124,7 @@
             android:layout_marginStart="@dimen/_16dp"
             android:background="@drawable/rounded_orange_button_background"
             android:contentDescription="@string/play_button"
+            android:onClick="onIbPlaySoundClick"
             android:paddingStart="@dimen/_8dp"
             android:paddingTop="@dimen/_1dp"
             android:paddingEnd="@dimen/_8dp"
@@ -125,6 +153,7 @@
             android:layout_marginEnd="@dimen/_16dp"
             android:background="?attr/selectableItemBackground"
             android:contentDescription="@string/loop_button"
+            android:onClick="onIvLoopClick"
             android:padding="@dimen/_5dp"
             android:src="@drawable/ic_start_loop"
             app:layout_constraintBottom_toTopOf="@+id/guideline2"
@@ -138,6 +167,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_extra_bold"
             android:text="@string/loop_off"
+            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
             app:layout_constraintEnd_toEndOf="@+id/iv_loop"
             app:layout_constraintStart_toStartOf="@+id/iv_loop"
             app:layout_constraintTop_toBottomOf="@+id/iv_loop" />
@@ -168,5 +198,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/timer_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:constraint_referenced_ids="tv_timer,iv_cancel_timer" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

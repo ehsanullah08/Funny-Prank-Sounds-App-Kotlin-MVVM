@@ -48,7 +48,6 @@
     <string name="woman_laughing">Lachende vrouw</string>
     <string name="baby_laughing">Lachend kindje</string>
     <string name="fart_1">Scheet 1</string>
-    <string name="failed_to_load_native_ad_with_error">Kan native advertentie niet laden met fout %1$s</string>
     <string name="loop_on">Loop aan</string>
     <string name="loop_off">Loop uit</string>
     <string name="english">English</string>
@@ -179,7 +178,6 @@
     <string name="baby_laugh_4">Babylach 4</string>
     <string name="baby_laugh_5">Babylach 5</string>
     <string name="baby_laugh_6">Babylach 6</string>
-    <string name="ad_attribution">Advertentie</string>
     <string name="if_you_want_to_prank_someone_then_check_out_this_app">Als je iemand voor de gek wilt houden, bekijk dan deze app: %1$s</string>
     <string name="share_via">Deel via</string>
     <string name="_feedback">%1$s [Feedback]</string>

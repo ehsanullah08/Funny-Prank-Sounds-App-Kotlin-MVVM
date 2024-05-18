@@ -23,6 +23,11 @@ class SoundsListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initializations()
+        setupAdapterOnSoundsList()
+    }
+
+    private fun initializations() {
         binding = ActivitySoundsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -38,8 +43,6 @@ class SoundsListActivity : AppCompatActivity() {
 
         binding.soundCategoryItem = soundCategory
         binding.lifecycleOwner = this
-
-        setupAdapterOnSoundsList()
     }
 
     fun onIvBackClick(view: View) {

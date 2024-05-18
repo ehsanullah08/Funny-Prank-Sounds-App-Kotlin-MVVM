@@ -1,15 +1,11 @@
 package com.example.pranksounds.utils
 
+import android.animation.ObjectAnimator
 import android.app.Activity
-import android.app.LocaleManager
-import android.content.Context
 import android.content.Intent
-import android.os.Build
-import android.os.LocaleList
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.os.LocaleListCompat
+import android.view.View
+import android.widget.ImageButton
 import com.example.pranksounds.ui.activities.MainActivity
-import java.util.Locale
 
 
 object Utils {
