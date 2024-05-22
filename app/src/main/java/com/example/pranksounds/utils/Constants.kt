@@ -21,8 +21,9 @@ object Constants {
 
     var USER_INTERACTIONS_COUNT = 0
 
-    const val ADMOB_AD_UNIT_ID = "ca-app-pub-3940256099942544/2247696110"
+
     const val INTERSTITIAL_AD_ID_1 = "ca-app-pub-2799645785064188/3305271217"
+    const val BANNER_AD_ID_1 = "ca-app-pub-2799645785064188/6667629243"
 
 
     const val INTERSTITIAL_TEST_AD_ID_1 = "ca-app-pub-3940256099942544/1033173712"

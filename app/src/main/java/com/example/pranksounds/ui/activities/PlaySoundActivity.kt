@@ -158,7 +158,7 @@ class PlaySoundActivity : AppCompatActivity() {
         AdsHelper.loadBannerAdWithConsent(
             this@PlaySoundActivity,
             binding.bannerAdPlaceholder,
-            Constants.BANNER_TEST_AD_ID_1,
+            Constants.BANNER_AD_ID_1,
             bannerAdSize
         )
 
@@ -364,7 +364,7 @@ class PlaySoundActivity : AppCompatActivity() {
 
             AdsHelper.loadInterstitialAdWithConsent(
                 this@PlaySoundActivity,
-                Constants.INTERSTITIAL_TEST_AD_ID_1
+                Constants.INTERSTITIAL_AD_ID_1
             )
         }
 

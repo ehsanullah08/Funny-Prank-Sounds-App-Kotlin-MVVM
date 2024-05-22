@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initializations() {
         // NOTE always use test ads during development and testing
-        StartAppSDK.setTestAdsEnabled(BuildConfig.DEBUG);
+        //StartAppSDK.setTestAdsEnabled(BuildConfig.DEBUG);
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
