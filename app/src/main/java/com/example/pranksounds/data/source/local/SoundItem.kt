@@ -1,20 +1,24 @@
-package com.example.pranksounds.data.models
+package com.example.pranksounds.data.source.local
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.example.pranksounds.utils.Constants
 
+@Entity(tableName = Constants.SOUNDS_TABLE)
 data class SoundItem(
-    var soundId: Int,
-    var title: String,
-    var colorCode: Int?,
-    var fileName: String?,
-    var bgImage: Int
+    @PrimaryKey(autoGenerate = false) val soundId: Int,
+    val title: String,
+    val colorCode: Int,
+    val fileName: String,
+    val bgImage: Int
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString()!!,
-        parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readString(),
+        parcel.readValue(Int::class.java.classLoader) as Int,
+        parcel.readString()!!,
         parcel.readInt()
     ) {
     }

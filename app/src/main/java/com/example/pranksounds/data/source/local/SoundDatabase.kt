@@ -1,13 +1,12 @@
-package com.example.pranksounds.data.room
+package com.example.pranksounds.data.source.local
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.pranksounds.utils.Constants
 
-@Database(entities = [Sound::class], version = 1)
+@Database(entities = [SoundItem::class], version = 1)
 abstract class SoundDatabase : RoomDatabase() {
 
     abstract fun soundDao(): SoundDAO

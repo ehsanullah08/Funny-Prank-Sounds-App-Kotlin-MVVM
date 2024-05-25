@@ -1,7 +1,7 @@
 package com.example.pranksounds.utils
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.pranksounds.data.models.SoundItem
+import com.example.pranksounds.data.source.local.SoundItem
 
 class SoundItemDiffCallback(
     private val oldList: List<SoundItem>,

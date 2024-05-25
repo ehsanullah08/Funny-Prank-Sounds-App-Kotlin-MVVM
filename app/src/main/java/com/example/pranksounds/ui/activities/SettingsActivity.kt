@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -15,12 +16,14 @@ import com.example.pranksounds.databinding.ActivityPlaySoundBinding
 import com.example.pranksounds.databinding.ActivitySettingsBinding
 import com.example.pranksounds.utils.Constants
 import com.example.pranksounds.utils.LangHelper
-import com.example.pranksounds.viewModels.LanguagesListViewModel
+import com.example.pranksounds.ui.viewModels.LanguagesListViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySettingsBinding
-    private lateinit var languagesListViewModel: LanguagesListViewModel
+    private val languagesListViewModel: LanguagesListViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,9 +31,6 @@ class SettingsActivity : AppCompatActivity() {
 
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        languagesListViewModel =
-            ViewModelProvider(this)[LanguagesListViewModel::class.java]
 
         setValuesOnViews()
     }

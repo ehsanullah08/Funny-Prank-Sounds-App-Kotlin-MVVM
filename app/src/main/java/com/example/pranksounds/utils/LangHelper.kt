@@ -18,6 +18,7 @@ object LangHelper {
     const val SPANISH = "es"
     const val CHINESE = "zh"
     const val DUTCH = "nl"
+    const val PORTUGUESE = "pt"
 
 
     fun changeLanguage(context: Context, languageCode: String) {

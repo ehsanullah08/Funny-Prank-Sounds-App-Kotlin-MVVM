@@ -9,32 +9,34 @@ import android.util.DisplayMetrics
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.pranksounds.R
-import com.example.pranksounds.data.models.SoundItem
+import com.example.pranksounds.data.source.local.SoundItem
 import com.example.pranksounds.databinding.ActivityPlaySoundBinding
-import com.example.pranksounds.utils.AdsHelper
+import com.example.pranksounds.utils.ads.AdsHelper
 import com.example.pranksounds.utils.AnimationHelper
 import com.example.pranksounds.utils.Constants
-import com.example.pranksounds.viewModels.PlaySoundViewModel
+import com.example.pranksounds.ui.viewModels.PlaySoundViewModel
 import com.google.android.gms.ads.AdSize
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.IOException
-import kotlin.concurrent.timer
 
 
+@AndroidEntryPoint
 class PlaySoundActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPlaySoundBinding
     private lateinit var mediaPlayer: MediaPlayer
     private val handler = Handler(Looper.getMainLooper())
 
-    private lateinit var playSoundViewModel: PlaySoundViewModel
+    private val playSoundViewModel: PlaySoundViewModel by viewModels()
     private var soundItem: SoundItem? = null
     private var isMarkedFav = false
 
@@ -69,9 +71,6 @@ class PlaySoundActivity : AppCompatActivity() {
     private fun initializations() {
         binding = ActivityPlaySoundBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        playSoundViewModel =
-            ViewModelProvider(this)[PlaySoundViewModel::class.java]
 
         binding.soundItem = getSoundItem()
         binding.lifecycleOwner = this

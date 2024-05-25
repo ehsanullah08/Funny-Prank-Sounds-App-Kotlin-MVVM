@@ -4,9 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pranksounds.data.models.SoundCategoryItem
-import com.example.pranksounds.data.models.SoundItem
 import com.example.pranksounds.databinding.ItemSoundCategoryListBinding
-import com.example.pranksounds.databinding.ItemSoundsListBinding
 import com.example.pranksounds.ui.viewHolders.SoundCategoryViewHolder
 
 class SoundsCategoriesListAdapter(private val categoriesList: List<SoundCategoryItem>, private val soundCategoryListener: SoundCategoryClickListener) :

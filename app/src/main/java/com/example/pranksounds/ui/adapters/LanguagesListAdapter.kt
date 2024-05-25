@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pranksounds.data.models.LanguageItem
-import com.example.pranksounds.data.models.SoundItem
 import com.example.pranksounds.databinding.ItemLanguagesListBinding
 import com.example.pranksounds.ui.viewHolders.LanguagesListViewHolder
 

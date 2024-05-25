@@ -1,7 +1,7 @@
 package com.example.pranksounds.ui.viewHolders
 
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pranksounds.data.models.SoundItem
+import com.example.pranksounds.data.source.local.SoundItem
 import com.example.pranksounds.databinding.ItemSoundsListBinding
 import com.example.pranksounds.ui.adapters.SoundClickListener
 

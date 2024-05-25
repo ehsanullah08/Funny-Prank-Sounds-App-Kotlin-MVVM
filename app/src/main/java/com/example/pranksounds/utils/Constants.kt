@@ -2,15 +2,6 @@ package com.example.pranksounds.utils
 
 object Constants {
 
-    const val URDU_CODE = "ur"
-    const val HINDI_CODE = "hi"
-    const val ARABIC_CODE = "ar"
-    const val ENGLISH_CODE = "en"
-    const val SPANISH_CODE = "es"
-    const val PORTUGUESE_CODE = "pt"
-    const val CHINESE_CODE = "zh"
-    const val DUTCH_CODE = "nl"
-    
     
     const val DATABASE_NAME = "sounds_database"
     const val SOUNDS_TABLE = "sounds_table"

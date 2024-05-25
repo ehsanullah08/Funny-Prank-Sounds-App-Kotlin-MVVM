@@ -1,11 +1,8 @@
-package com.example.pranksounds.viewModels
+package com.example.pranksounds.ui.viewModels
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.pranksounds.data.models.SoundItem
-import com.example.pranksounds.data.repositories.SoundsListRepo
 
 class HeaderViewModel : ViewModel() {
 

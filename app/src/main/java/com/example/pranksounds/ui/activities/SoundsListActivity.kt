@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.pranksounds.data.models.SoundCategoryItem
@@ -11,13 +12,15 @@ import com.example.pranksounds.databinding.ActivitySoundsListBinding
 import com.example.pranksounds.ui.adapters.SoundClickListener
 import com.example.pranksounds.ui.adapters.SoundsListAdapter
 import com.example.pranksounds.utils.Constants
-import com.example.pranksounds.viewModels.SoundsListViewModel
+import com.example.pranksounds.ui.viewModels.SoundsListViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SoundsListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySoundsListBinding
     private lateinit var soundsListAdapter: SoundsListAdapter
-    private lateinit var soundsListViewModel: SoundsListViewModel
+    private val soundsListViewModel: SoundsListViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,9 +33,6 @@ class SoundsListActivity : AppCompatActivity() {
     private fun initializations() {
         binding = ActivitySoundsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        soundsListViewModel =
-            ViewModelProvider(this)[SoundsListViewModel::class.java]
 
 
         val soundCategory = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {

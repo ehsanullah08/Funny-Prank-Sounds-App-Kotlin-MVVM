@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.pranksounds.R
@@ -16,11 +18,12 @@ import com.example.pranksounds.databinding.ActivityMainBinding
 import com.example.pranksounds.ui.activities.SoundsListActivity
 import com.example.pranksounds.databinding.FragmentHomeBinding
 import com.example.pranksounds.ui.activities.MainActivity
-import com.example.pranksounds.viewModels.HomeViewModel
+import com.example.pranksounds.ui.viewModels.HomeViewModel
 import com.example.pranksounds.ui.adapters.SoundCategoryClickListener
 import com.example.pranksounds.ui.adapters.SoundsCategoriesListAdapter
 import com.example.pranksounds.utils.Constants
-import com.example.pranksounds.viewModels.HeaderViewModel
+import com.example.pranksounds.ui.viewModels.HeaderViewModel
+import com.example.pranksounds.ui.viewModels.LanguagesListViewModel
 import kotlinx.coroutines.launch
 import java.util.Locale
 
@@ -28,7 +31,8 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private lateinit var soundsCategoriesListAdapter: SoundsCategoriesListAdapter
-    private lateinit var homeViewModel: HomeViewModel
+
+    private val homeViewModel: HomeViewModel by activityViewModels()
     private val headerViewModel: HeaderViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and
@@ -40,8 +44,6 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        homeViewModel =
-            ViewModelProvider(this)[HomeViewModel::class.java]
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root

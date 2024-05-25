@@ -7,24 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.MutableLiveData
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.pranksounds.R
-import com.example.pranksounds.data.models.SoundItem
-import com.example.pranksounds.data.repositories.FavSoundsRepo
+import com.example.pranksounds.data.source.local.SoundItem
 import com.example.pranksounds.databinding.FragmentFavouritesBinding
-import com.example.pranksounds.ui.activities.MainActivity
 import com.example.pranksounds.ui.activities.PlaySoundActivity
 import com.example.pranksounds.ui.adapters.FavSoundClickListener
 import com.example.pranksounds.ui.adapters.FavSoundsListAdapter
 import com.example.pranksounds.utils.Constants
-import com.example.pranksounds.viewModels.FavouritesViewModel
-import com.example.pranksounds.viewModels.HeaderViewModel
+import com.example.pranksounds.ui.viewModels.FavouritesViewModel
+import com.example.pranksounds.ui.viewModels.HeaderViewModel
 
 class FavouritesFragment : Fragment() {
 
     private var _binding: FragmentFavouritesBinding? = null
-    private lateinit var favouritesViewModel: FavouritesViewModel
+    private val favouritesViewModel: FavouritesViewModel by activityViewModels()
     private val headerViewModel: HeaderViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and
@@ -36,8 +34,6 @@ class FavouritesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        favouritesViewModel =
-            ViewModelProvider(this)[FavouritesViewModel::class.java]
 
         _binding = FragmentFavouritesBinding.inflate(inflater, container, false)
         val root: View = binding.root

@@ -1,4 +1,4 @@
-package com.example.pranksounds.utils
+package com.example.pranksounds.utils.ads
 
 import android.app.Activity
 import android.content.Context

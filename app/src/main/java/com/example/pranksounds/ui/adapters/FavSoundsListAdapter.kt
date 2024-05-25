@@ -3,7 +3,7 @@ package com.example.pranksounds.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pranksounds.data.models.SoundItem
+import com.example.pranksounds.data.source.local.SoundItem
 import com.example.pranksounds.databinding.ItemFavSoundsListBinding
 import com.example.pranksounds.ui.viewHolders.FavSoundViewHolder
 

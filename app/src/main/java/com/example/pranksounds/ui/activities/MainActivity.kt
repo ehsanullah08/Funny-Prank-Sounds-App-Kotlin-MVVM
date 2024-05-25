@@ -1,36 +1,22 @@
 package com.example.pranksounds.ui.activities
 
-import android.app.LocaleManager
-import android.content.ContentValues.TAG
 import android.content.Intent
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.LocaleList
-import android.os.Looper
-import android.util.Log
 import android.view.View
-import android.view.WindowInsetsController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.os.LocaleListCompat
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.pranksounds.BuildConfig
 import com.example.pranksounds.R
 import com.example.pranksounds.databinding.ActivityMainBinding
-import com.example.pranksounds.utils.AdsHelper
-import com.example.pranksounds.viewModels.HeaderViewModel
-import com.example.pranksounds.viewModels.HomeViewModel
-import com.google.android.gms.ads.MobileAds
+import com.example.pranksounds.utils.ads.AdsHelper
+import com.example.pranksounds.ui.viewModels.HeaderViewModel
 import com.google.firebase.FirebaseApp
 import com.google.firebase.crashlytics.FirebaseCrashlytics
-import com.startapp.sdk.adsbase.StartAppSDK
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
