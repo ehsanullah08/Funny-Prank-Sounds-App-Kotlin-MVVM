@@ -2,6 +2,7 @@ package com.example.pranksounds.data.source.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.pranksounds.data.models.SoundItem
 
 @Dao
 interface SoundDAO {

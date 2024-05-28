@@ -3,25 +3,17 @@ package com.example.pranksounds.data.repositories
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.pranksounds.data.source.local.SoundItem
+import com.example.pranksounds.data.models.SoundItem
+import com.example.pranksounds.data.source.local.SoundDAO
 import com.example.pranksounds.data.source.local.SoundDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class PlaySoundsRepo {
-
-    private lateinit var soundDatabase: SoundDatabase
-    private var favSoundsList: LiveData<List<SoundItem>>? = null
-
-
-    private fun initializeDB(context: Context): SoundDatabase {
-        return SoundDatabase.getDatabaseClient(context)
-    }
+class PlaySoundsRepo @Inject constructor(private val soundDAO: SoundDAO) {
 
     fun markFav(context: Context, soundItem: SoundItem) {
-
-        soundDatabase = initializeDB(context)
 
         CoroutineScope(Dispatchers.IO).launch {
             val loginDetails = SoundItem(
@@ -31,42 +23,38 @@ class PlaySoundsRepo {
                 soundItem.fileName,
                 soundItem.bgImage
             )
-            soundDatabase.soundDao().markFav(loginDetails)
+
+            soundDAO.markFav(loginDetails)
         }
 
     }
 
     fun removeFav(context: Context, soundId: Int) {
-        soundDatabase = initializeDB(context)
 
         CoroutineScope(Dispatchers.IO).launch {
-            soundDatabase.soundDao().removeFav(soundId)
+            soundDAO.removeFav(soundId)
         }
     }
 
     fun getFavSounds(context: Context): LiveData<List<SoundItem>> {
-        soundDatabase = initializeDB(context)
-        return soundDatabase.soundDao().getAllSounds()
+        return soundDAO.getAllSounds()
     }
 
     fun getFavoriteSoundById(context: Context, soundId: Int): SoundItem {
-        soundDatabase = initializeDB(context)
-        return soundDatabase.soundDao().getFavoriteSoundById(soundId)
+        return soundDAO.getFavoriteSoundById(soundId)
     }
 
     fun isSoundExists(context: Context, soundId: Int): MutableLiveData<Int> {
-        soundDatabase = initializeDB(context)
 
         val foundItemsCountLiveData = MutableLiveData<Int>()
         CoroutineScope(Dispatchers.IO).launch {
-            val foundItemsCount = soundDatabase.soundDao().isSoundExists(soundId)
+            val foundItemsCount = soundDAO.isSoundExists(soundId)
             foundItemsCountLiveData.postValue(foundItemsCount)
         }
         return foundItemsCountLiveData
     }
 
     suspend fun deleteAllFavSounds(context: Context) {
-        soundDatabase = initializeDB(context)
-        soundDatabase.soundDao().deleteAllSounds()
+        soundDAO.deleteAllSounds()
     }
 }

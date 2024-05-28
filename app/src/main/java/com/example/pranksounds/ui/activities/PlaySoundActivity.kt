@@ -12,10 +12,9 @@ import android.widget.ArrayAdapter
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.pranksounds.R
-import com.example.pranksounds.data.source.local.SoundItem
+import com.example.pranksounds.data.models.SoundItem
 import com.example.pranksounds.databinding.ActivityPlaySoundBinding
 import com.example.pranksounds.utils.ads.AdsHelper
 import com.example.pranksounds.utils.AnimationHelper

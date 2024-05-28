@@ -2,7 +2,7 @@ package com.example.pranksounds.data.repositories
 
 import android.content.Context
 import com.example.pranksounds.R
-import com.example.pranksounds.data.source.local.SoundItem
+import com.example.pranksounds.data.models.SoundItem
 
 class SoundsListRepo {
 

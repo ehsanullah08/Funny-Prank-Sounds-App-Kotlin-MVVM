@@ -2,26 +2,18 @@ package com.example.pranksounds.data.repositories
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import com.example.pranksounds.data.source.local.SoundItem
+import com.example.pranksounds.data.models.SoundItem
+import com.example.pranksounds.data.source.local.SoundDAO
 import com.example.pranksounds.data.source.local.SoundDatabase
+import javax.inject.Inject
 
-class FavSoundsRepo {
+class FavSoundsRepo @Inject constructor(private val soundDAO: SoundDAO) {
 
-    private lateinit var soundDatabase: SoundDatabase
-    private var favSoundsList: LiveData<List<SoundItem>>? = null
-
-
-    private fun initializeDB(context: Context): SoundDatabase {
-        return SoundDatabase.getDatabaseClient(context)
+    fun getFavSounds(): LiveData<List<SoundItem>> {
+        return soundDAO.getAllSounds()
     }
 
-    fun getFavSounds(context: Context): LiveData<List<SoundItem>> {
-        soundDatabase = initializeDB(context)
-        return soundDatabase.soundDao().getAllSounds()
-    }
-
-    suspend fun deleteAllFavSounds(context: Context) {
-        soundDatabase = initializeDB(context)
-        soundDatabase.soundDao().deleteAllSounds()
+    suspend fun deleteAllFavSounds() {
+        soundDAO.deleteAllSounds()
     }
 }

@@ -2,7 +2,7 @@ package com.example.pranksounds.ui.viewModels
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
-import com.example.pranksounds.data.source.local.SoundItem
+import com.example.pranksounds.data.models.SoundItem
 import com.example.pranksounds.data.repositories.SoundsListRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

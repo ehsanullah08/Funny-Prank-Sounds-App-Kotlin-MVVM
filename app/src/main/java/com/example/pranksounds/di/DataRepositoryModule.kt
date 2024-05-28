@@ -5,6 +5,7 @@ import com.example.pranksounds.data.repositories.HomeRepo
 import com.example.pranksounds.data.repositories.LanguagesListRepo
 import com.example.pranksounds.data.repositories.PlaySoundsRepo
 import com.example.pranksounds.data.repositories.SoundsListRepo
+import com.example.pranksounds.data.source.local.SoundDAO
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,8 +24,8 @@ object DataRepositoryModule {
 
     @Singleton
     @Provides
-    fun provideFavSoundsRepo(): FavSoundsRepo {
-        return FavSoundsRepo()
+    fun provideFavSoundsRepo(soundDAO: SoundDAO): FavSoundsRepo {
+        return FavSoundsRepo(soundDAO)
     }
 
     @Singleton
@@ -35,8 +36,8 @@ object DataRepositoryModule {
 
     @Singleton
     @Provides
-    fun providePlaySoundsRepo(): PlaySoundsRepo {
-        return PlaySoundsRepo()
+    fun providePlaySoundsRepo(soundDAO: SoundDAO): PlaySoundsRepo {
+        return PlaySoundsRepo(soundDAO)
     }
 
     @Singleton

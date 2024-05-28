@@ -7,7 +7,7 @@
 
         <variable
             name="soundItem"
-            type="com.example.pranksounds.data.source.local.SoundItem" />
+            type="com.example.pranksounds.data.models.SoundItem" />
 
         <variable
             name="favSoundClickListener"

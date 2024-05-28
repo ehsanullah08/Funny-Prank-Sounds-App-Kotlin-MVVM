@@ -7,10 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.example.pranksounds.R
-import com.example.pranksounds.data.source.local.SoundItem
+import com.example.pranksounds.data.models.SoundItem
 import com.example.pranksounds.databinding.FragmentFavouritesBinding
 import com.example.pranksounds.ui.activities.PlaySoundActivity
 import com.example.pranksounds.ui.adapters.FavSoundClickListener
@@ -64,7 +62,7 @@ class FavouritesFragment : Fragment() {
 
         binding.rvSoundsList.adapter = soundsListAdapter
 
-        favouritesViewModel.getFavSoundsList(requireActivity()).observe(viewLifecycleOwner) { soundList ->
+        favouritesViewModel.getFavSoundsList().observe(viewLifecycleOwner) { soundList ->
 
             val soundItemList = soundList.map { sound ->
                 // Convert each Sound object to SoundItem

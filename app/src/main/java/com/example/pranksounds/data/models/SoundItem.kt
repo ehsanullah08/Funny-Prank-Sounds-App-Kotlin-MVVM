@@ -1,4 +1,4 @@
-package com.example.pranksounds.data.source.local
+package com.example.pranksounds.data.models
 
 import android.os.Parcel
 import android.os.Parcelable
