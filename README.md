@@ -1,6 +1,6 @@
 # Funny Prank Sounds App ✔️
 
-## Android MVVM Architecture Sample (ViewModel + LiveData + Repository + Hilt + DataBinding + ViewBinding + Coroutines + Kotlin ) - Weather App
+## Android MVVM Architecture Sample (ViewModel + LiveData + Repository + Hilt + DataBinding + ViewBinding + Coroutines + Kotlin )
 
 ### App features
 1. List of sounds and their categories.
