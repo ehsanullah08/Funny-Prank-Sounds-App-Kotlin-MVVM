@@ -3,8 +3,8 @@
 ## Android MVVM Architecture Sample (ViewModel + LiveData + Repository + Hilt + DataBinding + ViewBinding + Coroutines + Kotlin ) - Weather App
 
 ### App features
-1. List of sounds and its categories.
-2. Play sounds with animation and user can play sounds in loop and can delay the sound to play.
+1. List of sounds and their categories.
+2. Play sounds with animation and the user can play sounds in a loop and can delay the sound to play.
 3. User can mark sounds as favorite.
 4. User can change the language of app from settings.
 5. User can share and rate the application.
