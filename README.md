@@ -10,6 +10,7 @@
 5. User can share and rate the application.
 
 
+
 #### A simple Entertaiment App 📱 built to demonstrate the use of modern android architecture component with MVVM Architecture 🏗
 
 ### Build With 🏗️
