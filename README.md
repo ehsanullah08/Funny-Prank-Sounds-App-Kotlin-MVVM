@@ -1,6 +1,6 @@
 # Funny Prank Sounds App ✔️
 
-# Android MVVM Architecture Sample (ViewModel + LiveData + Repository + Hilt + DataBinding + ViewBinding + Coroutines + Kotlin ) - Weather App
+## Android MVVM Architecture Sample (ViewModel + LiveData + Repository + Hilt + DataBinding + ViewBinding + Coroutines + Kotlin ) - Weather App
 
 ### App features
 1. List of sounds and its categories.
@@ -24,7 +24,7 @@
 - [Glide] - An image loading and caching library for Android focused on smooth loading.
 - [Firebase-Crashlytics] - Third-party library to track crashes in app during and after publishing.
 - [Admob] - To load ads in app.
-- [Startapp.io] - To load ads in app in case admob could not load ads.
+- [Start.io] - To load ads in app in case admob could not load ads.
 
 
    [ViewModel]: <https://developer.android.com/topic/libraries/architecture/viewmodel>
@@ -38,6 +38,9 @@
    [Coroutines]: <https://kotlinlang.org/docs/coroutines-overview.html>
    [MVVM (Model View View-Model)]: <https://developer.android.com/jetpack/guide#recommended-app-arch>
    [Room]: <https://developer.android.com/training/data-storage/room/>
+   [Firebase-Crashlytics]: <https://firebase.google.com/docs/crashlytics/get-started?platform=android/>
+   [Admob]: <https://apps.admob.com/v2/home?sac=true&pli=1&authuser=0/>
+   [Start.io]: <https://www.start.io//>
    
 ### Project Architecture 🗼
 
