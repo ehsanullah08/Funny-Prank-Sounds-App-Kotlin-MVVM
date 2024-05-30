@@ -46,3 +46,11 @@
 ### Project Architecture 🗼
 
 This app uses [MVVM (Model View View-Model)] architecture.
+
+![New Project](https://github.com/ehsanullah08/Funny-Prank-Sounds-App-Kotlin-MVVM/assets/33160240/ca956257-daa1-453d-a28b-b53f3882bdf7)
+![New Project (1)](https://github.com/ehsanullah08/Funny-Prank-Sounds-App-Kotlin-MVVM/assets/33160240/17ccbfb3-3921-4cdb-b427-da6da75bfb27)
+
+
+![New Project (2)](https://github.com/ehsanullah08/Funny-Prank-Sounds-App-Kotlin-MVVM/assets/33160240/9115617a-494c-4b95-bf59-793a43972655)
+![New Project (3)](https://github.com/ehsanullah08/Funny-Prank-Sounds-App-Kotlin-MVVM/assets/33160240/f9b35a4c-ddbb-4c0f-8e47-50eb30b645d5)
+
